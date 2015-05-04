@@ -28,6 +28,10 @@ namespace AirFighter {
             }
         }
 
+        public void MovePlayer(bool ToLeft) {
+            Player.Move(ToLeft);
+        }
+
         public void Move() {
             foreach (EnemyShip es in Enemies) {
                 es.Move();

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace AirFighter {
     public class EnemyShip : SpaceShip {
 
-        public EnemyShip(int x, int y) : base(new Point(x, y), 3, Resources.enemy) { }
+        public EnemyShip(int x, int y) : base(new Point(x, y), 3, Resources.planeEnemy) { }
 
         public override void Shot() {
         }
