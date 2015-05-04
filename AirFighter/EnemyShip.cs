@@ -8,14 +8,27 @@ using System.Threading.Tasks;
 
 namespace AirFighter {
     public class EnemyShip : SpaceShip {
-
-        public EnemyShip(int x, int y) : base(new Point(x, y), 1, Resources.planeEnemy) { }
+        private int EnemySpeed;
+        public EnemyShip(int x, int y) : base(new Point(x, y), 1, Resources.planeEnemy) {
+            EnemySpeed = 1;
+        }
 
         public override void Shot() {
         }
 
+        /// <summary>
+        /// Pridvizhuvanje na neprijatelskite objekti nadolu po Y - oskata.
+        /// </summary>
         public void Move() {
-            Position = new Point(Position.X, Position.Y + 1);
+            Position = new Point(Position.X, Position.Y + EnemySpeed);
+        }
+
+        /// <summary>
+        /// Ja setira brzinata so koja kje se dvizhat neprijatelite.
+        /// </summary>
+        /// <param name="EnemySpeed">Promenliva koja ja oznachuva brzinata na dvizhenje.</param>
+        public void SetEnemySpeed(int EnemySpeed) {
+            this.EnemySpeed = EnemySpeed;
         }
     }
 }

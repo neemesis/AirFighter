@@ -27,6 +27,7 @@
             this.Workspace = new System.Windows.Forms.Panel();
             this.InvalidateTimer = new System.Windows.Forms.Timer(this.components);
             this.MoveTimer = new System.Windows.Forms.Timer(this.components);
+            this.EnemiesTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // Workspace
@@ -63,6 +64,7 @@
         private System.Windows.Forms.Panel Workspace;
         private System.Windows.Forms.Timer InvalidateTimer;
         private System.Windows.Forms.Timer MoveTimer;
+        private System.Windows.Forms.Timer EnemiesTimer;
     }
 }
 
