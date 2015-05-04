@@ -7,14 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AirFighter {
-    public class Player : SpaceShip {
+    public class PlayerShip : SpaceShip {
 
-        public Player() : base (new Point(580, 200), 100, Resources.plane2) {
-        }
-
-        public override void RemoveHealth() {
-            Health -= 10;
-        }
+        public PlayerShip() : base (new Point(140, 450), 10, Resources.plane2) { }
 
         public override void Shot() {
             

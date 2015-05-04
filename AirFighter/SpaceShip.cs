@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirFighter {
     public abstract class SpaceShip {
-        public Point Position { get; private set; }
+        public Point Position { get; protected set; }
         public int Health { get; protected set; }
         protected Image ShipImage;
 
@@ -21,15 +21,13 @@ namespace AirFighter {
             this.ShipImage = ShipImage;
         }
 
-        public void SetPosition(Point Position) {
-            this.Position = Position;
+        public void RemoveHealth() {
+            Health -= 1;
         }
 
         public void Draw(Graphics g) {
             g.DrawImage(ShipImage, Position);
         }
-
-        public abstract void RemoveHealth();
         
         public abstract void Shot();
     }
