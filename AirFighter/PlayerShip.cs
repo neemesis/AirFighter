@@ -15,11 +15,25 @@ namespace AirFighter {
         /// Dvizhenje na igrachot levo - desno.
         /// </summary>
         /// <param name="ToLeft">Promenliva koja oznachuva na koja strana kje se dvizhi.</param>
-        public void Move(bool ToLeft) {
-            if (ToLeft)
-                Position = new Point(Position.X + 11, Position.Y);
-            else
-                Position = new Point(Position.X - 11, Position.Y);
+        public void Move(int Side, Point p) {
+            if (Side == 3) {
+                int c = p.X - 28;
+                if (c < 0)
+                    c = 0;
+                else if (c > 326)
+                    c = 326;
+                Position = new Point(c, Position.Y);
+            } else if (Side == 1) {
+                int c = Position.X + 11;
+                if (c > 326)
+                    c = 326;
+                Position = new Point(c, Position.Y);
+            } else if (Side == 2) {
+                int c = Position.X - 11;
+                if (c < 0)
+                    c = 0;
+                Position = new Point(c, Position.Y);
+            }
         }
 
         public override void Shot() {

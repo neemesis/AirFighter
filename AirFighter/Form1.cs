@@ -20,15 +20,12 @@ namespace AirFighter {
             InvalidateTimer.Start();
             MoveTimer.Start();
             EnemiesTimer.Start();
-
-            typeof(Panel).InvokeMember("DoubleBuffered",
-                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-                null, Workspace, new object[] { true });
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e) {
-            Graphics g = Workspace.CreateGraphics();
-            Window.Draw(g);
+            //Graphics g = Workspace.CreateGraphics();
+            
+            Window.Draw(e.Graphics);
         }
 
         private void InvalidateTimer_Tick(object sender, EventArgs e) {
@@ -41,10 +38,10 @@ namespace AirFighter {
 
         private void Form1_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Left)
-                Window.MovePlayer(false);
+                Window.MovePlayer(2, Point.Empty);
             else if (e.KeyCode == Keys.Right)
-                Window.MovePlayer(true);
-            else if (e.KeyCode == Keys.Enter || true)
+                Window.MovePlayer(1, Point.Empty);
+            else if (e.KeyCode == Keys.Enter)
                 Window.AddBullet();
         }
 
@@ -52,6 +49,14 @@ namespace AirFighter {
             Window.GenerateEnemies();
             if (EnemiesTimer.Interval > 80)
                 EnemiesTimer.Interval -= 50;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e) {
+            Window.MovePlayer(3, e.Location);
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e) {
+            Window.AddBullet();
         }
     }
 }

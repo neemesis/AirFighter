@@ -24,21 +24,14 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.Workspace = new System.Windows.Forms.Panel();
             this.InvalidateTimer = new System.Windows.Forms.Timer(this.components);
             this.MoveTimer = new System.Windows.Forms.Timer(this.components);
             this.EnemiesTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // Workspace
-            // 
-            this.Workspace.Location = new System.Drawing.Point(1, 1);
-            this.Workspace.Name = "Workspace";
-            this.Workspace.Size = new System.Drawing.Size(383, 560);
-            this.Workspace.TabIndex = 0;
-            // 
             // InvalidateTimer
             // 
+            this.InvalidateTimer.Interval = 20;
             this.InvalidateTimer.Tick += new System.EventHandler(this.InvalidateTimer_Tick);
             // 
             // MoveTimer
@@ -55,18 +48,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 561);
-            this.Controls.Add(this.Workspace);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel Workspace;
         private System.Windows.Forms.Timer InvalidateTimer;
         private System.Windows.Forms.Timer MoveTimer;
         private System.Windows.Forms.Timer EnemiesTimer;

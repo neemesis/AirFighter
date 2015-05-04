@@ -46,9 +46,10 @@ namespace AirFighter {
         /// <summary>
         /// Metoda koja ja povikuva metodata "Move" kaj igrachot.
         /// </summary>
-        /// <param name="ToLeft">Na koja strana da se dvizhi igrachot.</param>
-        public void MovePlayer(bool ToLeft) {
-            Player.Move(ToLeft);
+        /// <param name="Side">Na koja strana da se dvizhi igrachot.</param>
+        /// <param name="p">Ako se dvizhime so gluvcheto, so "p" ja prenosime pozicijata.</param>
+        public void MovePlayer(int Side, Point p) {
+            Player.Move(Side, p);
         }
 
         /// <summary>
