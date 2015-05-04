@@ -18,6 +18,7 @@ namespace AirFighter {
             this.DoubleBuffered = true;
             InvalidateTimer.Start();
             MoveTimer.Start();
+            EnemiesTimer.Start();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e) {
@@ -38,8 +39,14 @@ namespace AirFighter {
                 Window.MovePlayer(false);
             else if (e.KeyCode == Keys.Right)
                 Window.MovePlayer(true);
-            else if (e.KeyCode == Keys.Enter)
+            else if (e.KeyCode == Keys.Enter || true)
                 Window.AddBullet();
+        }
+
+        private void EnemiesTimer_Tick(object sender, EventArgs e) {
+            Window.GenerateEnemies();
+            if (EnemiesTimer.Interval > 80)
+                EnemiesTimer.Interval -= 50;
         }
     }
 }

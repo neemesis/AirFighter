@@ -22,15 +22,12 @@ namespace AirFighter {
             Bullets = new List<Bullet>();
             Score = 0;
             Randomizer = new Random();
-
-            for (int i = 0; i < 3; i++) {
-                EnemyShip es = new EnemyShip(i * 120, 10);
-                Enemies.Add(es);
-            }
-
         }
 
         public void Draw(Graphics g) {
+
+            Console.WriteLine("#E " + Enemies.Count + " #B " + Bullets.Count);
+
             g.Clear(Color.White);
             Player.Draw(g);
             foreach (EnemyShip es in Enemies) {
@@ -62,9 +59,27 @@ namespace AirFighter {
         /// <param name="b">Metak (Bullet)</param>
         /// <returns>Rezultatot e "true" ako dvata objekti se vo dopir.</returns>
         private bool CheckHit(EnemyShip es, Bullet b) {
+            if (b.Position.Y < 5) {
+                b.Active = false;
+                return false;
+            }
             bool x = es.Position.Y + 41 > b.Position.Y;
             bool y = (b.Position.X > es.Position.X - 8) && (b.Position.X < es.Position.X + 38);
             return x && y;
+        }
+
+        /// <summary>
+        /// Gi brishe avionite shto se nadvor od vidliviot del.
+        /// </summary>
+        /// <param name="es">EnemyShip</param>
+        /// <returns>Vrakaj "true" ako avionot e pod opredelenata granica.</returns>
+        private bool CheckEnemy(EnemyShip es) {
+            if (es.Position.Y > 520) {
+                Player.RemoveHealth();
+                es.RemoveHealth();
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -72,6 +87,8 @@ namespace AirFighter {
         /// </summary>
         public void Move() {
             foreach (EnemyShip es in Enemies) {
+                if (CheckEnemy(es))
+                    continue;
                 foreach (Bullet b in Bullets) {
                     if (CheckHit(es, b)) {
                         ++Score;
@@ -96,6 +113,13 @@ namespace AirFighter {
         public void AddBullet() {
             Bullet b = new Bullet(Player.Position);
             Bullets.Add(b);
+        }
+
+        public void GenerateEnemies() {
+            for (int i = 0; i < Randomizer.Next(1, 5); i++) {
+                EnemyShip es = new EnemyShip(Randomizer.Next(20, 310), 0);
+                Enemies.Add(es);
+            }
         }
     }
 }

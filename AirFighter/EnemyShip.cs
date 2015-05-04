@@ -10,7 +10,7 @@ namespace AirFighter {
     public class EnemyShip : SpaceShip {
         private int EnemySpeed;
         public EnemyShip(int x, int y) : base(new Point(x, y), 1, Resources.planeEnemy) {
-            EnemySpeed = 1;
+            EnemySpeed = 2;
         }
 
         public override void Shot() {

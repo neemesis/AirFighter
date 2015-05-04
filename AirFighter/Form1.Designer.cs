@@ -45,6 +45,11 @@
             // 
             this.MoveTimer.Tick += new System.EventHandler(this.MoveTimer_Tick);
             // 
+            // EnemiesTimer
+            // 
+            this.EnemiesTimer.Interval = 4000;
+            this.EnemiesTimer.Tick += new System.EventHandler(this.EnemiesTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
