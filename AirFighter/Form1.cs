@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,6 +20,10 @@ namespace AirFighter {
             InvalidateTimer.Start();
             MoveTimer.Start();
             EnemiesTimer.Start();
+
+            typeof(Panel).InvokeMember("DoubleBuffered",
+                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                null, Workspace, new object[] { true });
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e) {

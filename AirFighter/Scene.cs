@@ -26,9 +26,8 @@ namespace AirFighter {
 
         public void Draw(Graphics g) {
 
-            Console.WriteLine("#E " + Enemies.Count + " #B " + Bullets.Count);
-
             g.Clear(Color.White);
+
             Player.Draw(g);
             foreach (EnemyShip es in Enemies) {
                 es.Draw(g);
