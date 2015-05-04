@@ -13,9 +13,9 @@ namespace AirFighter {
 
         public void Move(bool ToLeft) {
             if (ToLeft)
-                Position = new Point(Position.X + 8, Position.Y);
+                Position = new Point(Position.X + 11, Position.Y);
             else
-                Position = new Point(Position.X - 8, Position.Y);
+                Position = new Point(Position.X - 11, Position.Y);
         }
 
         public override void Shot() {

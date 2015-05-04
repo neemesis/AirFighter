@@ -9,15 +9,17 @@ using System.Threading.Tasks;
 namespace AirFighter {
     public class Bullet {
         private Image BulletImage;
-        private Point Position;
+        public Point Position;
+        public bool Active;
 
         public Bullet(Point P) {
             BulletImage = Resources.smallBullet;
             Position = new Point(P.X + 23, P.Y - 5);
+            Active = true;
         }
 
         public void Move() {
-            Position = new Point(Position.X, Position.Y - 4);
+            Position = new Point(Position.X, Position.Y - 10);
         }
 
         public void Draw(Graphics g) {

@@ -38,6 +38,8 @@ namespace AirFighter {
                 Window.MovePlayer(false);
             else if (e.KeyCode == Keys.Right)
                 Window.MovePlayer(true);
+            else if (e.KeyCode == Keys.Enter)
+                Window.AddBullet();
         }
     }
 }
