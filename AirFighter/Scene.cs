@@ -14,11 +14,13 @@ namespace AirFighter {
         private Random Randomizer;
         private int Counter;
         private int EnemySpeed;
+        private Form1 ReferenceToForm;
 
         /// <summary>
         /// Konstruktor na scenata.
         /// </summary>
-        public Scene() {
+        public Scene(Form1 f) {
+            ReferenceToForm = f;
             Player = new PlayerShip();
             Enemies = new List<EnemyShip>();
             Bullets = new List<Bullet>();
@@ -81,6 +83,8 @@ namespace AirFighter {
         private bool CheckEnemy(EnemyShip es) {
             if (es.Position.Y > 520) {
                 Player.RemoveHealth();
+                if (Player.Health == 0)
+                    ReferenceToForm.EndGame();
                 es.RemoveHealth();
                 return true;
             }
