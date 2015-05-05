@@ -17,6 +17,8 @@ namespace AirFighter {
             InitializeComponent();
             Window = new Scene();
             this.DoubleBuffered = true;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             InvalidateTimer.Start();
             MoveTimer.Start();
             EnemiesTimer.Start();
