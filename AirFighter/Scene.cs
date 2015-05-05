@@ -116,8 +116,8 @@ namespace AirFighter {
         }
 
         public void GenerateEnemies() {
-            for (int i = 0; i < Randomizer.Next(1, 5); i++) {
-                EnemyShip es = new EnemyShip(Randomizer.Next(20, 310), 0);
+            for (int i = 0; i < Randomizer.Next(0, 3); i++) {
+                EnemyShip es = new EnemyShip(Randomizer.Next(20 - 5 * i , 310), 0);
                 Enemies.Add(es);
             }
         }
