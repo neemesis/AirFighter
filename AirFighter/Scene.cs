@@ -12,6 +12,8 @@ namespace AirFighter {
         private List<EnemyShip> Enemies;
         private List<Bullet> Bullets;
         private Random Randomizer;
+        private int Counter;
+        private int EnemySpeed;
 
         /// <summary>
         /// Konstruktor na scenata.
@@ -21,6 +23,8 @@ namespace AirFighter {
             Enemies = new List<EnemyShip>();
             Bullets = new List<Bullet>();
             Score = 0;
+            Counter = 0;
+            EnemySpeed = 2;
             Randomizer = new Random();
         }
 
@@ -59,7 +63,7 @@ namespace AirFighter {
         /// <param name="b">Metak (Bullet)</param>
         /// <returns>Rezultatot e "true" ako dvata objekti se vo dopir.</returns>
         private bool CheckHit(EnemyShip es, Bullet b) {
-            if (b.Position.Y < 5) {
+            if (b.Position.Y < -180) {
                 b.Active = false;
                 return false;
             }
@@ -115,9 +119,28 @@ namespace AirFighter {
             Bullets.Add(b);
         }
 
+        /// <summary>
+        /// Funkcija koja gi zabrzuva neprijatelite.
+        /// </summary>
+        public void SpeedUpEnemies() {
+            Counter = ++Counter % 2;
+            if (Counter == 1) {
+                ++EnemySpeed;
+                Console.WriteLine("Speed: " + EnemySpeed);
+            }
+        }
+
+        /// <summary>
+        /// Funkcija za generiranje na neprijateli.
+        /// Prvo se generira kolku neprijateli.
+        /// Potoa se stavat na random mesto i se dodavaat vo listata na neprijateli.
+        /// </summary>
         public void GenerateEnemies() {
-            for (int i = 0; i < Randomizer.Next(0, 3); i++) {
-                EnemyShip es = new EnemyShip(Randomizer.Next(20 - 5 * i , 310), 0);
+            int c = Randomizer.Next(0, 3);
+            int from = 0;
+            if (c != 0) from = 300 / c;
+            for (int i = 0; i < c; i++) {
+                EnemyShip es = new EnemyShip(Randomizer.Next(i * from, (i + 1) * from), -10 * i, EnemySpeed);
                 Enemies.Add(es);
             }
         }

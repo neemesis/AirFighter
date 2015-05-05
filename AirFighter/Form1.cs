@@ -31,7 +31,7 @@ namespace AirFighter {
         }
 
         private void InvalidateTimer_Tick(object sender, EventArgs e) {
-            Invalidate();
+            Invalidate(true);
         }
 
         private void MoveTimer_Tick(object sender, EventArgs e) {
@@ -49,7 +49,8 @@ namespace AirFighter {
 
         private void EnemiesTimer_Tick(object sender, EventArgs e) {
             Window.GenerateEnemies();
-            if (EnemiesTimer.Interval > 80)
+            Window.SpeedUpEnemies();
+            if (EnemiesTimer.Interval > 180)
                 EnemiesTimer.Interval -= 50;
         }
 

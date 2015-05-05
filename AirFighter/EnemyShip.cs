@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace AirFighter {
     public class EnemyShip : SpaceShip {
         private int EnemySpeed;
-        public EnemyShip(int x, int y) : base(new Point(x, y), 1, Resources.enemySmall) {
-            EnemySpeed = 2;
+        public EnemyShip(int x, int y, int EnemySpeed) : base(new Point(x, y), 1, Resources.enemySmall) {
+            this.EnemySpeed = EnemySpeed;
         }
 
         public override void Shot() {
@@ -21,14 +21,6 @@ namespace AirFighter {
         /// </summary>
         public void Move() {
             Position = new Point(Position.X, Position.Y + EnemySpeed);
-        }
-
-        /// <summary>
-        /// Ja setira brzinata so koja kje se dvizhat neprijatelite.
-        /// </summary>
-        /// <param name="EnemySpeed">Promenliva koja ja oznachuva brzinata na dvizhenje.</param>
-        public void SetEnemySpeed(int EnemySpeed) {
-            this.EnemySpeed = EnemySpeed;
         }
     }
 }
