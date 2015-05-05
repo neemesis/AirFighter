@@ -44,6 +44,5 @@ namespace AirFighter {
             g.DrawImage(ShipImage, Position);
         }
         
-        public abstract void Shot();
     }
 }

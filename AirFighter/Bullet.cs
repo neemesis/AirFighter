@@ -26,7 +26,7 @@ namespace AirFighter {
         /// Pridvizhuvanje na metakot.
         /// </summary>
         public void Move() {
-            Position = new Point(Position.X, Position.Y - 180);
+            Position = new Point(Position.X, Position.Y - 40);
         }
 
         /// <summary>

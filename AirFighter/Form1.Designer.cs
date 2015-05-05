@@ -25,18 +25,13 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.InvalidateTimer = new System.Windows.Forms.Timer(this.components);
-            this.MoveTimer = new System.Windows.Forms.Timer(this.components);
             this.EnemiesTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // InvalidateTimer
             // 
-            this.InvalidateTimer.Interval = 20;
+            this.InvalidateTimer.Interval = 10;
             this.InvalidateTimer.Tick += new System.EventHandler(this.InvalidateTimer_Tick);
-            // 
-            // MoveTimer
-            // 
-            this.MoveTimer.Tick += new System.EventHandler(this.MoveTimer_Tick);
             // 
             // EnemiesTimer
             // 
@@ -60,7 +55,6 @@
 
         #endregion
         private System.Windows.Forms.Timer InvalidateTimer;
-        private System.Windows.Forms.Timer MoveTimer;
         private System.Windows.Forms.Timer EnemiesTimer;
     }
 }

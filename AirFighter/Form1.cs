@@ -20,7 +20,7 @@ namespace AirFighter {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             InvalidateTimer.Start();
-            MoveTimer.Start();
+            //MoveTimer.Start();
             EnemiesTimer.Start();
         }
 
@@ -31,11 +31,8 @@ namespace AirFighter {
         }
 
         private void InvalidateTimer_Tick(object sender, EventArgs e) {
-            Invalidate(true);
-        }
-
-        private void MoveTimer_Tick(object sender, EventArgs e) {
             Window.Move();
+            Invalidate(true);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e) {

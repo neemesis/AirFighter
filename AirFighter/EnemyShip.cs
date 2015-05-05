@@ -13,9 +13,6 @@ namespace AirFighter {
             this.EnemySpeed = EnemySpeed;
         }
 
-        public override void Shot() {
-        }
-
         /// <summary>
         /// Pridvizhuvanje na neprijatelskite objekti nadolu po Y - oskata.
         /// </summary>

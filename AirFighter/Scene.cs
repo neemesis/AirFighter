@@ -33,6 +33,7 @@ namespace AirFighter {
             g.Clear(Color.White);
 
             Player.Draw(g);
+
             foreach (EnemyShip es in Enemies) {
                 es.Draw(g);
             }
@@ -123,8 +124,8 @@ namespace AirFighter {
         /// Funkcija koja gi zabrzuva neprijatelite.
         /// </summary>
         public void SpeedUpEnemies() {
-            Counter = ++Counter % 2;
-            if (Counter == 1) {
+            Counter = ++Counter % 5;
+            if (Counter == 4) {
                 ++EnemySpeed;
                 Console.WriteLine("Speed: " + EnemySpeed);
             }
@@ -136,7 +137,7 @@ namespace AirFighter {
         /// Potoa se stavat na random mesto i se dodavaat vo listata na neprijateli.
         /// </summary>
         public void GenerateEnemies() {
-            int c = Randomizer.Next(0, 3);
+            int c = Randomizer.Next(1, 4);
             int from = 0;
             if (c != 0) from = 300 / c;
             for (int i = 0; i < c; i++) {
