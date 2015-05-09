@@ -123,6 +123,8 @@ namespace AirFighter {
         public void EndGame() {
             InvalidateTimer.Stop();
             EnemiesTimer.Stop();
+            IsPlaying = false;
+            Invalidate();
         }
     }
 }
