@@ -23,6 +23,7 @@ namespace AirFighter {
         private bool[] Fields;
         private SoundPlayer BombSound;
         private SoundPlayer GunSound;
+        private SoundPlayer DeadEnemySound;
         private Image Background1, Background2;
         private bool FirstBackground, SecondBackground;
         private int BackgroundPosition1, BackgroundPosition2;
@@ -52,6 +53,7 @@ namespace AirFighter {
             Fields[0] = Fields[1] = Fields[2] = false;
             BombSound = new SoundPlayer("bomb_sound.wav");
             GunSound = new SoundPlayer("shot_gun_2.wav");
+            DeadEnemySound = new SoundPlayer("BangShort.wav");
             Background1 = Background2 = Resources.sky;
             BackgroundTimer = new Timer();
             BackgroundTimer.Interval = 10;
@@ -276,6 +278,7 @@ namespace AirFighter {
                     continue;
                 foreach (Bullet b in Bullets) {
                     if (CheckHit(es, b)) {
+                        DeadEnemySound.Play();
                         ++Score;
                         es.RemoveHealth();
                         es.IsDead = true;
