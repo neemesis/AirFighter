@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AirFighter.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AirFighter {
@@ -17,8 +18,18 @@ namespace AirFighter {
         private int EnemySpeed;
         private Timer MoveTimer;
         private Timer EnemiesTimer;
+        private Timer BackgroundTimer;
         private bool IsPlaying;
         private bool[] Fields;
+        private SoundPlayer BombSound;
+        private SoundPlayer GunSound;
+        private Image Background1, Background2;
+        private bool FirstBackground, SecondBackground;
+        private int BackgroundPosition1, BackgroundPosition2;
+        private static readonly int BackgroundEnd = 600;
+        private static readonly int BackgroundHeight = -3310;
+        private List<String> ResultsList;
+        private int DeadCounter;
 
         /// <summary>
         /// Konstruktor na scenata.
@@ -39,16 +50,51 @@ namespace AirFighter {
             IsPlaying = false;
             Fields = new bool[3];
             Fields[0] = Fields[1] = Fields[2] = false;
+            BombSound = new SoundPlayer("bomb_sound.wav");
+            GunSound = new SoundPlayer("shot_gun_2.wav");
+            Background1 = Background2 = Resources.sky;
+            BackgroundTimer = new Timer();
+            BackgroundTimer.Interval = 10;
+            BackgroundTimer.Tick += BackgroundTimer_Tick;
+            FirstBackground = true;
+            SecondBackground = false;
+            BackgroundPosition1 = 0;
+            DeadCounter = 0;
+        }
+
+        private void BackgroundTimer_Tick(object sender, EventArgs e) {
+            if (FirstBackground) {
+                if (BackgroundPosition1 == 0) {
+                    SecondBackground = true;
+                    BackgroundPosition2 = BackgroundHeight;
+                } else if (BackgroundPosition1 == BackgroundEnd) {
+                    FirstBackground = false;
+                }
+                ++BackgroundPosition1;
+            }
+
+            if (SecondBackground) {
+                if (BackgroundPosition2 == 0) {
+                    FirstBackground = true;
+                    BackgroundPosition1 = BackgroundHeight;
+                } else if (BackgroundPosition2 == BackgroundEnd) {
+                    SecondBackground = false;
+                }
+                ++BackgroundPosition2;
+            }
         }
 
         private void NewGame() {
+            IsPlaying = true;
             MoveTimer.Start();
             EnemiesTimer.Start();
+            BackgroundTimer.Start();
         }
 
         public void EndGame() {
             MoveTimer.Stop();
             EnemiesTimer.Stop();
+            System.Threading.Thread.Sleep(5000);
             IsPlaying = false;
         }
 
@@ -73,9 +119,33 @@ namespace AirFighter {
         }
 
         public void Draw(Graphics g) {
+            g.Clear(Color.White);
+
             if (IsPlaying) {
-                g.Clear(Color.White);
+                if (!Player.IsDead) {
+                    if (FirstBackground)
+                        g.DrawImage(Background1, -26, BackgroundPosition1, 426, 3313);
+                    if (SecondBackground)
+                        g.DrawImage(Background2, -26, BackgroundPosition2, 426, 3313);
+                }
+
+                Brush brush = new SolidBrush(Color.Black);
+                g.DrawString(Score.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 10, 10);
+                g.DrawString(Player.Health.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 330, 10);
+                brush.Dispose();
+
                 Player.Draw(g);
+
+                if (Player.IsDead) {
+                    Font testFont = new Font("Consolas", 130.0f, FontStyle.Bold, GraphicsUnit.Pixel);
+                    Brush b = new SolidBrush(Color.Black);
+                    g.DrawString("Крај", testFont, b, 20, 100);
+                    BombSound.Play();
+                    b.Dispose();
+                    if (++Counter == 10)
+                        EndGame();
+                    return;
+                }
 
                 foreach (EnemyShip es in Enemies) {
                     es.Draw(g);
@@ -84,11 +154,6 @@ namespace AirFighter {
                 foreach (Bullet b in Bullets) {
                     b.Draw(g);
                 }
-
-                Brush brush = new SolidBrush(Color.Black);
-                g.DrawString(Score.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 10, 10);
-                g.DrawString(Player.Health.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 330, 10);
-                brush.Dispose();
             } else {
                 Brush b = new SolidBrush(Color.FromArgb(18, 44, 127));
                 Brush b2 = new SolidBrush(Color.FromArgb(37, 89, 255));
@@ -145,10 +210,15 @@ namespace AirFighter {
         public void MouseClick(Point e) {
             if (IsPlaying) {
                 AddBullet();
+                GunSound.Play();
             } else {
                 if (e.Y >= 20 && e.Y <= 190) {
                     IsPlaying = true;
                     NewGame();
+                } else if (e.Y >= 200 && e.Y <= 370) {
+
+                } else if (e.Y >= 380 && e.Y <= 550) {
+                    MessageBox.Show("Instrukcii");
                 }
             }
         }
@@ -184,10 +254,10 @@ namespace AirFighter {
         /// <param name="es">EnemyShip</param>
         /// <returns>Vrakaj "true" ako avionot e pod opredelenata granica.</returns>
         private bool CheckEnemy(EnemyShip es) {
-            if (es.Position.Y > 520) {
+            if (es.Position.Y > 550) {
                 Player.RemoveHealth();
                 if (Player.Health == 0)
-                    EndGame();
+                    Player.IsDead = true;
                 es.RemoveHealth();
                 return true;
             }
@@ -198,6 +268,9 @@ namespace AirFighter {
         /// Pridvizhuvanje na site objekti na scenata.
         /// </summary>
         public void Move() {
+            Enemies.RemoveAll(x => x.IsDead == true);
+            Enemies.RemoveAll(x => x.Health == 0);
+
             foreach (EnemyShip es in Enemies) {
                 if (CheckEnemy(es))
                     continue;
@@ -205,13 +278,13 @@ namespace AirFighter {
                     if (CheckHit(es, b)) {
                         ++Score;
                         es.RemoveHealth();
+                        es.IsDead = true;
                         b.Active = false;
                     }
                 }
                 es.Move();
             }
 
-            Enemies.RemoveAll(x => x.Health == 0);
             Bullets.RemoveAll(x => x.Active == false);
 
             foreach (Bullet b in Bullets) {

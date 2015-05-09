@@ -14,7 +14,7 @@ namespace AirFighter {
         /// <summary>
         /// Dvizhenje na igrachot levo - desno.
         /// </summary>
-        /// <param name="ToLeft">Promenliva koja oznachuva na koja strana kje se dvizhi.</param>
+        /// <param name="Side">Promenliva koja oznachuva na koja strana kje se dvizhi.</param>
         public void Move(int Side, Point p) {
             if (Side == 3) {
                 int c = p.X - 28;
