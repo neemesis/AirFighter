@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AirFighter {
     public class Scene {
@@ -14,40 +15,142 @@ namespace AirFighter {
         private Random Randomizer;
         private int Counter;
         private int EnemySpeed;
-        private Form1 ReferenceToForm;
+        private Timer MoveTimer;
+        private Timer EnemiesTimer;
+        private bool IsPlaying;
+        private bool[] Fields;
 
         /// <summary>
         /// Konstruktor na scenata.
         /// </summary>
-        public Scene(Form1 f) {
-            ReferenceToForm = f;
+        public Scene() {
             Player = new PlayerShip();
             Enemies = new List<EnemyShip>();
             Bullets = new List<Bullet>();
-            Score = 0;
-            Counter = 0;
+            Score = Counter = 0;
             EnemySpeed = 2;
             Randomizer = new Random();
+            MoveTimer = new Timer();
+            MoveTimer.Interval = 20;
+            MoveTimer.Tick += MoveTimer_Tick;
+            EnemiesTimer = new Timer();
+            EnemiesTimer.Interval = 4000;
+            EnemiesTimer.Tick += EnemiesTimer_Tick;
+            IsPlaying = false;
+            Fields = new bool[3];
+            Fields[0] = Fields[1] = Fields[2] = false;
+        }
+
+        private void NewGame() {
+            MoveTimer.Start();
+            EnemiesTimer.Start();
+        }
+
+        public void EndGame() {
+            MoveTimer.Stop();
+            EnemiesTimer.Stop();
+            IsPlaying = false;
+        }
+
+        public void KeyDown(KeyEventArgs e) {
+            if (e.KeyCode == Keys.Left)
+                MovePlayer(2, Point.Empty);
+            else if (e.KeyCode == Keys.Right)
+                MovePlayer(1, Point.Empty);
+            else if (e.KeyCode == Keys.Enter)
+                AddBullet();
+        }
+
+        private void EnemiesTimer_Tick(object sender, EventArgs e) {
+            GenerateEnemies();
+            SpeedUpEnemies();
+            if (EnemiesTimer.Interval > 280)
+                EnemiesTimer.Interval -= 50;
+        }
+
+        private void MoveTimer_Tick(object sender, EventArgs e) {
+            Move();
         }
 
         public void Draw(Graphics g) {
+            if (IsPlaying) {
+                g.Clear(Color.White);
+                Player.Draw(g);
 
-            g.Clear(Color.White);
+                foreach (EnemyShip es in Enemies) {
+                    es.Draw(g);
+                }
 
-            Player.Draw(g);
+                foreach (Bullet b in Bullets) {
+                    b.Draw(g);
+                }
 
-            foreach (EnemyShip es in Enemies) {
-                es.Draw(g);
+                Brush brush = new SolidBrush(Color.Black);
+                g.DrawString(Score.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 10, 10);
+                g.DrawString(Player.Health.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 330, 10);
+                brush.Dispose();
+            } else {
+                Brush b = new SolidBrush(Color.FromArgb(18, 44, 127));
+                Brush b2 = new SolidBrush(Color.FromArgb(37, 89, 255));
+
+                if (Fields[0])
+                    g.FillRectangle(b, 10, 20, 365, 170);
+                else
+                    g.FillRectangle(b2, 10, 20, 365, 170);
+                if (Fields[1])
+                    g.FillRectangle(b, 10, 200, 365, 170);
+                else
+                    g.FillRectangle(b2, 10, 200, 365, 170);
+                if (Fields[2])
+                    g.FillRectangle(b, 10, 380, 365, 170);
+                else
+                    g.FillRectangle(b2, 10, 380, 365, 170);
+
+                Font testFont = new Font("Consolas", 30.0f, FontStyle.Bold, GraphicsUnit.Pixel);
+
+                b = new SolidBrush(Color.White);
+
+                g.DrawString("Нова игра", testFont, b, 110, 85);
+                g.DrawString("Најдобри резултати", testFont, b, 35, 265);
+                g.DrawString("Инструкции", testFont, b, 108, 445);
+
+                b.Dispose();
             }
+        }
 
-            foreach (Bullet b in Bullets) {
-                b.Draw(g);
+        public void MouseMove(Point e) {
+            if (IsPlaying) {
+                MovePlayer(3, e);
+            } else {
+                if (e.Y >= 20 && e.Y <= 190) {
+                    Fields[0] = true;
+                    Fields[1] = false;
+                    Fields[2] = false;
+                } else if (e.Y >= 200 && e.Y <= 370) {
+                    Fields[0] = false;
+                    Fields[1] = true;
+                    Fields[2] = false;
+                } else if (e.Y >= 380 && e.Y <= 550) {
+                    Fields[0] = false;
+                    Fields[1] = false;
+                    Fields[2] = true;
+                } else {
+                    Fields[0] = false;
+                    Fields[1] = false;
+                    Fields[2] = false;
+                }
             }
+        }
 
-            Brush brush = new SolidBrush(Color.Black);
-            g.DrawString(Score.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 10, 10);
-            g.DrawString(Player.Health.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 330, 10);
-            brush.Dispose();
+        public void MouseClick(Point e) {
+            if (IsPlaying) {
+                AddBullet();
+            } else {
+                if (e.Y >= 20 && e.Y <= 190) {
+                    IsPlaying = true;
+                    NewGame();
+                }
+            }
         }
 
         /// <summary>
@@ -84,7 +187,7 @@ namespace AirFighter {
             if (es.Position.Y > 520) {
                 Player.RemoveHealth();
                 if (Player.Health == 0)
-                    ReferenceToForm.EndGame();
+                    EndGame();
                 es.RemoveHealth();
                 return true;
             }
