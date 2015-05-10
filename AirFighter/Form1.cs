@@ -21,6 +21,7 @@ namespace AirFighter {
             this.DoubleBuffered = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.Cursor = Cursors.Cross;
             InvalidateTimer.Start();
         }
 

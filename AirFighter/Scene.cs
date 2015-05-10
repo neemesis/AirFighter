@@ -170,6 +170,7 @@ namespace AirFighter {
             g.Clear(Color.White);
 
             if (IsPlaying) {
+
                 if (!Player.IsDead) {
                     if (FirstBackground)
                         g.DrawImage(Background1, 0, BackgroundPosition1, 426, 3312);
