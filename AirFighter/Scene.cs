@@ -62,7 +62,7 @@ namespace AirFighter {
             MenuHover = new SoundPlayer(Resources.mouseclick);
             Background1 = Background2 = Resources.sky;
             BackgroundTimer = new Timer();
-            BackgroundTimer.Interval = 10;
+            BackgroundTimer.Interval = 50;
             BackgroundTimer.Tick += BackgroundTimer_Tick;
             Init();
             Scoreboard = new List<ScoreboardEntry>();
@@ -179,14 +179,14 @@ namespace AirFighter {
 
                 
                 Brush brush = new SolidBrush(Color.DarkSlateBlue);
-                g.DrawString("Score: ", new Font("Arial", 15), brush, 10, 16);
+                g.DrawImage(Resources.enemyHUD, 5, 4);
                 brush = new SolidBrush(Color.DarkSlateBlue);
-                g.DrawString(Score.ToString(), new Font("Arial", 20, FontStyle.Bold), brush, 70, 10);
+                g.DrawString(Score.ToString(), new Font("Arial", 20, FontStyle.Bold), brush, 40, 7);
                 if (Player.Health == 10)
-                    g.DrawString(Player.Health.ToString(), new Font("Arial", 20, FontStyle.Bold), brush, 310, 15);
+                    g.DrawString(Player.Health.ToString(), new Font("Arial", 20, FontStyle.Bold), brush, 310, 7);
                 else
-                    g.DrawString(Player.Health.ToString(), new Font("Arial", 20, FontStyle.Bold), brush, 330, 15);
-                g.DrawImage(Resources.hearth, 345, 10, 35, 35);                
+                    g.DrawString(Player.Health.ToString(), new Font("Arial", 20, FontStyle.Bold), brush, 330, 7);
+                g.DrawImage(Resources.hearth, 345, 3, 35, 35);                
                 brush.Dispose();
 
                 Player.Draw(g);
