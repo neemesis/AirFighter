@@ -41,7 +41,8 @@ namespace AirFighter {
         /// Odzemanje na health.
         /// </summary>
         public void RemoveHealth() {
-            Health -= 1;
+            if (Health > 0)
+                Health -= 1;
         }
 
         /// <summary>
