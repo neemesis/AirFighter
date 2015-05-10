@@ -71,6 +71,24 @@ namespace AirFighter.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream BangShort {
+            get {
+                return ResourceManager.GetStream("BangShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream bomb_sound {
+            get {
+                return ResourceManager.GetStream("bomb_sound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap boom {
@@ -87,6 +105,15 @@ namespace AirFighter.Properties {
             get {
                 object obj = ResourceManager.GetObject("enemySmall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mouseclick {
+            get {
+                return ResourceManager.GetStream("mouseclick", resourceCulture);
             }
         }
         
@@ -117,6 +144,15 @@ namespace AirFighter.Properties {
             get {
                 object obj = ResourceManager.GetObject("planeReal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream shot_gun_2 {
+            get {
+                return ResourceManager.GetStream("shot_gun_2", resourceCulture);
             }
         }
         

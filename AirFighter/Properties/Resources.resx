@@ -121,11 +121,20 @@
   <data name="bang" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BangShort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BangShort.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bomb_sound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bomb_sound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="boom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\boom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="enemySmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\enemySmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mouseclick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mouseclick.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="plane2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plane2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -135,6 +144,9 @@
   </data>
   <data name="planeReal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\planeReal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shot_gun_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shot_gun_2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="sky" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sky.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

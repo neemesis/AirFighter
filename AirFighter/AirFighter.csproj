@@ -113,7 +113,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\bang.png" />
+    <None Include="Resources\BangShort.wav" />
+    <None Include="Resources\bomb_sound.wav" />
     <Content Include="Resources\boom.jpg" />
+    <None Include="Resources\mouseclick.wav" />
+    <None Include="Resources\shot_gun_2.wav" />
     <Content Include="Resources\sky.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

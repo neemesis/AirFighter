@@ -49,10 +49,10 @@ namespace AirFighter {
             IsPlaying = false;
             Fields = new bool[3];
             Fields[0] = Fields[1] = Fields[2] = false;
-            BombSound = new SoundPlayer("bomb_sound.wav");
-            GunSound = new SoundPlayer("shot_gun_2.wav");
-            DeadEnemySound = new SoundPlayer("BangShort.wav");
-            MenuHover = new SoundPlayer("mouseclick.wav");
+            BombSound = new SoundPlayer(Resources.bomb_sound);
+            GunSound = new SoundPlayer(Resources.shot_gun_2);
+            DeadEnemySound = new SoundPlayer(Resources.BangShort);
+            MenuHover = new SoundPlayer(Resources.mouseclick);
             Background1 = Background2 = Resources.sky;
             BackgroundTimer = new Timer();
             BackgroundTimer.Interval = 10;
