@@ -29,7 +29,7 @@ namespace AirFighter {
         private int BackgroundPosition1, BackgroundPosition2;
         private static readonly int BackgroundEnd = 600;
         private static readonly int BackgroundHeight = -3310;
-        private List<String> ResultsList;
+        private List<ScoreboardEntry> Scoreboard;
         private int DeadCounter;
 
         /// <summary>
@@ -37,10 +37,6 @@ namespace AirFighter {
         /// </summary>
         public Scene() {
             Player = new PlayerShip();
-            Enemies = new List<EnemyShip>();
-            Bullets = new List<Bullet>();
-            Score = Counter = 0;
-            EnemySpeed = 2;
             Randomizer = new Random();
             MoveTimer = new Timer();
             MoveTimer.Interval = 20;
@@ -58,10 +54,8 @@ namespace AirFighter {
             BackgroundTimer = new Timer();
             BackgroundTimer.Interval = 10;
             BackgroundTimer.Tick += BackgroundTimer_Tick;
-            FirstBackground = true;
-            SecondBackground = false;
-            BackgroundPosition1 = 0;
-            DeadCounter = 0;
+            Init();
+            Scoreboard = new List<ScoreboardEntry>();
         }
 
         private void BackgroundTimer_Tick(object sender, EventArgs e) {
@@ -86,7 +80,21 @@ namespace AirFighter {
             }
         }
 
+        private void Init() {
+            Enemies = new List<EnemyShip>();
+            Bullets = new List<Bullet>();
+            FirstBackground = true;
+            SecondBackground = false;
+            BackgroundPosition1 = 0;
+            DeadCounter = 0;
+            Player = new PlayerShip();
+            Score = Counter = 0;
+            EnemySpeed = 2;
+            EnemiesTimer.Interval = 4000;
+        }
+
         private void NewGame() {
+            Init();
             IsPlaying = true;
             MoveTimer.Start();
             EnemiesTimer.Start();
@@ -96,8 +104,12 @@ namespace AirFighter {
         public void EndGame() {
             MoveTimer.Stop();
             EnemiesTimer.Stop();
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(2000);
             IsPlaying = false;
+            ScoreboardForm sbf = new ScoreboardForm(Score);
+            if (sbf.ShowDialog() == DialogResult.OK) {
+                Scoreboard.Add(sbf.Entry);
+            }
         }
 
         public void KeyDown(KeyEventArgs e) {
@@ -142,8 +154,8 @@ namespace AirFighter {
                     Font testFont = new Font("Consolas", 130.0f, FontStyle.Bold, GraphicsUnit.Pixel);
                     Brush b = new SolidBrush(Color.Black);
                     g.DrawString("Крај", testFont, b, 20, 100);
-                    BombSound.Play();
                     b.Dispose();
+                    BombSound.Play();
                     if (++Counter == 10)
                         EndGame();
                     return;
@@ -218,6 +230,15 @@ namespace AirFighter {
                     IsPlaying = true;
                     NewGame();
                 } else if (e.Y >= 200 && e.Y <= 370) {
+                    Scoreboard = Scoreboard.OrderByDescending(x => x.Score).ToList();
+                    string Result = "";
+
+                    int i = 0;
+                    foreach (ScoreboardEntry se in Scoreboard) {
+                        Result += ++i + ". " + se.Name + " : " + se.Score + "\n";
+                    }
+
+                    MessageBox.Show(Result);
 
                 } else if (e.Y >= 380 && e.Y <= 550) {
                     MessageBox.Show("Instrukcii");
