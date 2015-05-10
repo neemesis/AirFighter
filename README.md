@@ -1,5 +1,4 @@
 # AirFighter
-A game in Visual Studio 2015
 
 # Објаснување на проблемот #
 
