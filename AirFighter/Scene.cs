@@ -129,7 +129,7 @@ namespace AirFighter {
         }
 
         /// <summary>
-        /// Kontroli od tastatura.
+        /// Kontroli od tastaturata.
         /// </summary>
         /// <param name="e">Koe kopche e pretisnato.</param>
         public void KeyDown(KeyEventArgs e) {
