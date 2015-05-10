@@ -169,9 +169,16 @@ namespace AirFighter {
                         g.DrawImage(Background2, 0, BackgroundPosition2, 426, 3312);
                 }
 
-                Brush brush = new SolidBrush(Color.Black);
-                g.DrawString(Score.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 10, 10);
-                g.DrawString(Player.Health.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 330, 10);
+                
+                Brush brush = new SolidBrush(Color.DarkRed);
+                g.DrawString("Score: ", new Font("Arial", 15), brush, 10, 16);
+                brush = new SolidBrush(Color.DarkBlue);
+                g.DrawString(Score.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 70, 10);
+                if (Player.Health == 10)
+                    g.DrawString(Player.Health.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 300, 10);
+                else
+                    g.DrawString(Player.Health.ToString(), new Font("Arial", 24, FontStyle.Bold), brush, 320, 10);
+                g.DrawImage(Resources.hearth, 345, 10, 35, 35);                
                 brush.Dispose();
 
                 Player.Draw(g);
