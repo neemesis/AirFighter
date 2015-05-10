@@ -196,7 +196,7 @@ namespace AirFighter {
                 }
             } else {
                 //Brush b = new SolidBrush(Color.FromArgb(18, 44, 127));
-                Brush b = new SolidBrush(Color.Aquamarine);
+                Brush b = new SolidBrush(Color.Bisque);
                 Brush b2 = new SolidBrush(Color.FromArgb(37, 89, 255));
 
                 if (Fields[0])
