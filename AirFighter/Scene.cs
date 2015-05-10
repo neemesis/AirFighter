@@ -166,6 +166,10 @@ namespace AirFighter {
             Move();
         }
 
+        /// <summary>
+        /// Draw metoda koja ja iscrtuva scenata.
+        /// </summary>
+        /// <param name="g">Graphics</param>
         public void Draw(Graphics g) {
             g.Clear(Color.White);
 
@@ -193,10 +197,7 @@ namespace AirFighter {
                 Player.Draw(g);
 
                 if (Player.IsDead) {
-                    Font testFont = new Font("Consolas", 130.0f, FontStyle.Bold, GraphicsUnit.Pixel);
-                    Brush b = new SolidBrush(Color.Black);
-                    g.DrawString("Крај", testFont, b, 20, 100);
-                    b.Dispose();
+                    g.DrawImage(Resources.game_over, 80, 100);
                     BombSound.Play();
                     if (++Counter == 10)
                         EndGame();
