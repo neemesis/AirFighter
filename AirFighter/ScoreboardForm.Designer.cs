@@ -80,7 +80,7 @@
             // lblPoeni
             // 
             this.lblPoeni.AutoSize = true;
-            this.lblPoeni.Location = new System.Drawing.Point(105, 9);
+            this.lblPoeni.Location = new System.Drawing.Point(115, 9);
             this.lblPoeni.Name = "lblPoeni";
             this.lblPoeni.Size = new System.Drawing.Size(0, 13);
             this.lblPoeni.TabIndex = 5;
