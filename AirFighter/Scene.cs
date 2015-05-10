@@ -210,7 +210,7 @@ namespace AirFighter {
                     b.Draw(g);
                 }
             } else {
-                g.FillRectangle(new SolidBrush(Color.LightGray), 0, 0, 400, 600);
+                g.FillRectangle(new SolidBrush(Color.Lavender), 0, 0, 400, 600);
                 
                 Brush b = new SolidBrush(Color.LightSeaGreen);
                 Brush b2 = new SolidBrush(Color.Teal);
