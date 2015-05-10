@@ -118,6 +118,9 @@
     <Content Include="Resources\boom.jpg" />
     <None Include="Resources\mouseclick.wav" />
     <None Include="Resources\shot_gun_2.wav" />
+    <None Include="Resources\heart.png" />
+    <None Include="Resources\heart2.png" />
+    <None Include="Resources\hearth.png" />
     <Content Include="Resources\sky.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
