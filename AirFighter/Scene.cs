@@ -168,6 +168,7 @@ namespace AirFighter {
 
         public void Draw(Graphics g) {
             g.Clear(Color.White);
+            
 
             if (IsPlaying) {
 
@@ -195,7 +196,8 @@ namespace AirFighter {
                 if (Player.IsDead) {
                     Font testFont = new Font("Consolas", 130.0f, FontStyle.Bold, GraphicsUnit.Pixel);
                     Brush b = new SolidBrush(Color.Black);
-                    g.DrawString("Крај", testFont, b, 20, 100);
+                    //g.DrawString("Крај", testFont, b, 20, 100);
+                    g.DrawImage(Resources.game_over, 400, 600);
                     b.Dispose();
                     BombSound.Play();
                     if (++Counter == 10)
