@@ -122,6 +122,7 @@
     <None Include="Resources\heart2.png" />
     <None Include="Resources\hearth.png" />
     <None Include="Resources\enemyHUD.png" />
+    <None Include="Resources\game_over.jpg" />
     <Content Include="Resources\sky.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
