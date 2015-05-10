@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AirFighter {
+    /// <summary>
+    /// Klasa koja go pretstavuva igrachot.
+    /// </summary>
     public class PlayerShip : SpaceShip {
 
         public PlayerShip() : base (new Point(157, 502), 10, Resources.planeReal) { }

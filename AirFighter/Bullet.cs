@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AirFighter {
+    /// <summary>
+    /// Klasa vo koja se chuvaat osnovnite podatoci za oruzhjeto.
+    /// </summary>
     public class Bullet {
         private Image BulletImage;
         public Point Position;

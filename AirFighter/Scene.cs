@@ -2,12 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 
 namespace AirFighter {
+    /// <summary>
+    /// Glavnata klasa vo koja se iscrtuvaat site elementi od igrata.
+    /// Od tuka se kontrolira mehanikata na igrata.
+    /// </summary>
     public class Scene {
         private int Score;
         private PlayerShip Player;
@@ -59,6 +66,7 @@ namespace AirFighter {
             BackgroundTimer.Tick += BackgroundTimer_Tick;
             Init();
             Scoreboard = new List<ScoreboardEntry>();
+            LoadScoreboard();
         }
 
         /// <summary>
@@ -396,6 +404,33 @@ namespace AirFighter {
                     Randomizer.Next(EnemySpeed - 1, EnemySpeed + 1));
                 Enemies.Add(es);
             }
+        }
+
+        /// <summary>
+        /// Funkcija koja sluzhi za zapishuvanje na tabelata so poeni vo datoteka.
+        /// Pravi serializacija na listata.
+        /// </summary>
+        public void SaveScoreboard() {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("Scoreboard.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, Scoreboard);
+            stream.Close();
+        }
+
+        /// <summary>
+        /// Funkcija koja od dadena datoteka gi vnesuva tabelite vo lista.
+        /// Pravi deserializacija na strim.
+        /// </summary>
+        public void LoadScoreboard() {
+            IFormatter formatter = new BinaryFormatter();
+            try {
+                Stream stream = new FileStream("Scoreboard.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+                Scoreboard = (List<ScoreboardEntry>) formatter.Deserialize(stream);
+                stream.Close();
+            } catch (Exception e) {
+                Console.WriteLine("Nema zachuvano Scoreboard!");
+            }
+            
         }
     }
 }

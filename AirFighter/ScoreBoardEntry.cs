@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AirFighter {
+    /// <summary>
+    /// Klasa so chii objekti se pretstavuvaat rezultatite od edna igra.
+    /// </summary>
+    [Serializable]
     public class ScoreboardEntry {
         public int Score { get; private set; }
         public string Name { get; set; }

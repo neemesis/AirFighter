@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AirFighter {
+    /// <summary>
+    /// Klasa za pretstavuvanje na neprijatelskite avionchinja.
+    /// </summary>
     public class EnemyShip : SpaceShip {
         private int EnemySpeed;
         public EnemyShip(int x, int y, int EnemySpeed) : base(new Point(x, y), 1, Resources.enemySmall) {

@@ -16,6 +16,7 @@ namespace AirFighter {
 
         public Form1() {
             InitializeComponent();
+            AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
             Window = new Scene();
             this.DoubleBuffered = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -41,6 +42,11 @@ namespace AirFighter {
 
         private void Form1_MouseClick(object sender, MouseEventArgs e) {
             Window.MouseClick(e.Location);
+        }
+
+        private void OnProcessExit(object sender, EventArgs e) {
+            Console.WriteLine("On Exit");
+            Window.SaveScoreboard();
         }
     }
 }

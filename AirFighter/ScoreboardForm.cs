@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AirFighter {
+    /// <summary>
+    /// Forma vo koja se vnesuvaat podatocite za igrachot.
+    /// </summary>
     public partial class ScoreboardForm : Form {
         public ScoreboardEntry Entry;
 
