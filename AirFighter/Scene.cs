@@ -31,6 +31,7 @@ namespace AirFighter {
         private static readonly int BackgroundHeight = -3310;
         private List<ScoreboardEntry> Scoreboard;
         private int DeadCounter;
+        private int HowManyEnemies;
 
         /// <summary>
         /// Konstruktor na scenata.
@@ -58,6 +59,9 @@ namespace AirFighter {
             Scoreboard = new List<ScoreboardEntry>();
         }
 
+        /// <summary>
+        /// Event Handler na tajmerot odgovoren za pozadinata.
+        /// </summary>
         private void BackgroundTimer_Tick(object sender, EventArgs e) {
             if (FirstBackground) {
                 if (BackgroundPosition1 == 0) {
@@ -80,7 +84,11 @@ namespace AirFighter {
             }
         }
 
+        /// <summary>
+        /// Metoda za inicijalizacija pri sekoja nova igra.
+        /// </summary>
         private void Init() {
+            HowManyEnemies = 4;
             Enemies = new List<EnemyShip>();
             Bullets = new List<Bullet>();
             FirstBackground = true;
@@ -93,6 +101,9 @@ namespace AirFighter {
             EnemiesTimer.Interval = 4000;
         }
 
+        /// <summary>
+        /// Funkcija za otpochnuvanje na igrata.
+        /// </summary>
         private void NewGame() {
             Init();
             IsPlaying = true;
@@ -101,6 +112,9 @@ namespace AirFighter {
             BackgroundTimer.Start();
         }
 
+        /// <summary>
+        /// Funkcija za kraj na igrata.
+        /// </summary>
         public void EndGame() {
             MoveTimer.Stop();
             EnemiesTimer.Stop();
@@ -112,6 +126,10 @@ namespace AirFighter {
             }
         }
 
+        /// <summary>
+        /// Kontroli od tastatura.
+        /// </summary>
+        /// <param name="e">Koe kopche e pretisnato.</param>
         public void KeyDown(KeyEventArgs e) {
             if (e.KeyCode == Keys.Left)
                 MovePlayer(2, Point.Empty);
@@ -121,6 +139,9 @@ namespace AirFighter {
                 AddBullet();
         }
 
+        /// <summary>
+        /// Tajmer zadolzhen za generirawe na neprijateli.
+        /// </summary>
         private void EnemiesTimer_Tick(object sender, EventArgs e) {
             GenerateEnemies();
             SpeedUpEnemies();
@@ -128,6 +149,9 @@ namespace AirFighter {
                 EnemiesTimer.Interval -= 50;
         }
 
+        /// <summary>
+        /// Tajmer zadolzhen za dvizhenje na elementite.
+        /// </summary>
         private void MoveTimer_Tick(object sender, EventArgs e) {
             Move();
         }
@@ -197,6 +221,9 @@ namespace AirFighter {
             }
         }
 
+        /// <summary>
+        /// Funkcija za selektiranje na izbor od menito, kako i za dvizhenje na igrachot.
+        /// </summary>
         public void MouseMove(Point e) {
             if (IsPlaying) {
                 MovePlayer(3, e);
@@ -221,6 +248,9 @@ namespace AirFighter {
             }
         }
 
+        /// <summary>
+        /// Funkcija koja go hendla leviot klik.
+        /// </summary>
         public void MouseClick(Point e) {
             if (IsPlaying) {
                 AddBullet();
@@ -330,7 +360,9 @@ namespace AirFighter {
         public void SpeedUpEnemies() {
             Counter = ++Counter % 5;
             if (Counter == 4) {
-                ++EnemySpeed;
+                if (++EnemySpeed % 6 == 0) {
+                    ++HowManyEnemies;
+                }
                 Console.WriteLine("Speed: " + EnemySpeed);
             }
         }
@@ -341,11 +373,12 @@ namespace AirFighter {
         /// Potoa se stavat na random mesto i se dodavaat vo listata na neprijateli.
         /// </summary>
         public void GenerateEnemies() {
-            int c = Randomizer.Next(1, 4);
+            int c = Randomizer.Next(1, HowManyEnemies);
             int from = 0;
             if (c != 0) from = 300 / c;
             for (int i = 0; i < c; i++) {
-                EnemyShip es = new EnemyShip(Randomizer.Next(i * from, (i + 1) * from), -10 * i, EnemySpeed);
+                EnemyShip es = new EnemyShip(Randomizer.Next(i * from, (i + 1) * from), Randomizer.Next(-180, -20),
+                    Randomizer.Next(EnemySpeed - 1, EnemySpeed + 1));
                 Enemies.Add(es);
             }
         }
