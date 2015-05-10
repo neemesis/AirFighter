@@ -1,4 +1,4 @@
-﻿using AirFighter.Properties;
+using AirFighter.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,6 +40,7 @@ namespace AirFighter {
         private List<ScoreboardEntry> Scoreboard;
         private int DeadCounter;
         private int HowManyEnemies;
+        private int FirstOpen;
 
         /// <summary>
         /// Konstruktor na scenata.
@@ -67,6 +68,7 @@ namespace AirFighter {
             Init();
             Scoreboard = new List<ScoreboardEntry>();
             LoadScoreboard();
+            FirstOpen = 0;
         }
 
         /// <summary>
@@ -166,9 +168,12 @@ namespace AirFighter {
             Move();
         }
 
+        /// <summary>
+        /// Draw metoda koja ja iscrtuva scenata.
+        /// </summary>
+        /// <param name="g">Graphics</param>
         public void Draw(Graphics g) {
             g.Clear(Color.White);
-            
 
             if (IsPlaying) {
 
@@ -194,11 +199,7 @@ namespace AirFighter {
                 Player.Draw(g);
 
                 if (Player.IsDead) {
-                    Font testFont = new Font("Consolas", 130.0f, FontStyle.Bold, GraphicsUnit.Pixel);
-                    Brush b = new SolidBrush(Color.Black);
-                    //g.DrawString("Крај", testFont, b, 20, 100);
-                    g.DrawImage(Resources.game_over, 400, 600);
-                    b.Dispose();
+                    g.DrawImage(Resources.game_over, 80, 100);
                     BombSound.Play();
                     if (++Counter == 10)
                         EndGame();
@@ -213,6 +214,11 @@ namespace AirFighter {
                     b.Draw(g);
                 }
             } else {
+                if (FirstOpen == 1) {
+                    System.Threading.Thread.Sleep(2000);
+                    FirstOpen = 2;
+                }
+
                 g.FillRectangle(new SolidBrush(Color.Lavender), 0, 0, 400, 600);
                 
                 Brush b = new SolidBrush(Color.LightSeaGreen);
@@ -240,6 +246,12 @@ namespace AirFighter {
                 g.DrawString("Инструкции", testFont, b, 108, 445);
 
                 b.Dispose();
+
+                if (FirstOpen == 0) {
+                    Console.WriteLine("FirstOpen");
+                    g.DrawImage(Resources.intro, 0, -24, 390, 585);
+                    FirstOpen = 1;
+                }
             }
         }
 
