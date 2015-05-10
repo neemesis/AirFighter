@@ -40,6 +40,7 @@ namespace AirFighter {
         private List<ScoreboardEntry> Scoreboard;
         private int DeadCounter;
         private int HowManyEnemies;
+        private int FirstOpen;
 
         /// <summary>
         /// Konstruktor na scenata.
@@ -67,6 +68,7 @@ namespace AirFighter {
             Init();
             Scoreboard = new List<ScoreboardEntry>();
             LoadScoreboard();
+            FirstOpen = 0;
         }
 
         /// <summary>
@@ -212,6 +214,11 @@ namespace AirFighter {
                     b.Draw(g);
                 }
             } else {
+                if (FirstOpen == 1) {
+                    System.Threading.Thread.Sleep(2000);
+                    FirstOpen = 2;
+                }
+
                 g.FillRectangle(new SolidBrush(Color.Lavender), 0, 0, 400, 600);
                 
                 Brush b = new SolidBrush(Color.LightSeaGreen);
@@ -239,6 +246,12 @@ namespace AirFighter {
                 g.DrawString("Инструкции", testFont, b, 108, 445);
 
                 b.Dispose();
+
+                if (FirstOpen == 0) {
+                    Console.WriteLine("FirstOpen");
+                    g.DrawImage(Resources.intro, 0, -24, 390, 585);
+                    FirstOpen = 1;
+                }
             }
         }
 
