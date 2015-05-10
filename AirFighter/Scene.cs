@@ -297,12 +297,17 @@ namespace AirFighter {
                     int i = 0;
                     foreach (ScoreboardEntry se in Scoreboard) {
                         Result += ++i + ". " + se.Name + " : " + se.Score + "\n";
+                        if (i == 20)
+                            break;
                     }
-
-                    MessageBox.Show(Result);
-
+                    MessageBox.Show(Result, "Scoreboard");
                 } else if (e.Y >= 380 && e.Y <= 550) {
-                    MessageBox.Show("Instrukcii");
+                    string Instrukcii = "Авионот го управуваме со движење на маусот и притоа го движиме во насока лево или " +
+                        "насока десно, додека истрелите кон непријателите ги упатуваме со клик на маусот(било тоа " +
+                        "да е лев или десен лик). Притоа гледаме да ги уништиме сите непријатели кои што ке ни се најдат " +
+                        "на патот бидејки секој не уништен авион кој ке не одмине ни одзема 1 живот, а ние имаме само 10 " +
+                        "животи.";
+                    MessageBox.Show(Instrukcii, "Инструкции");
                 }
             }
         }
