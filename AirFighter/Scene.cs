@@ -195,10 +195,11 @@ namespace AirFighter {
                     b.Draw(g);
                 }
             } else {
-                //Brush b = new SolidBrush(Color.FromArgb(18, 44, 127));
-                Brush b = new SolidBrush(Color.Bisque);
-                Brush b2 = new SolidBrush(Color.FromArgb(37, 89, 255));
-
+                g.FillRectangle(new SolidBrush(Color.LightGray), 0, 0, 400, 600);
+                
+                Brush b = new SolidBrush(Color.LightSeaGreen);
+                Brush b2 = new SolidBrush(Color.Teal);
+                
                 if (Fields[0])
                     g.FillRectangle(b, 10, 20, 365, 170);
                 else
