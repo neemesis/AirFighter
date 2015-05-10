@@ -30,5 +30,13 @@ namespace AirFighter {
             DialogResult = DialogResult.No;
             this.Close();
         }
+
+        private void tbIme_Validating(object sender, CancelEventArgs e) {
+            if (tbIme.Text.Length < 2) {
+                e.Cancel = true;
+                Error.SetError(tbIme, "Внесете валидно име!");
+            } else
+                Error.SetError(tbIme, null);
+        }
     }
 }

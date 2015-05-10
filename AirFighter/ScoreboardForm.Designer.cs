@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.tbIme = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -30,6 +31,8 @@
             this.btnZachuvaj = new System.Windows.Forms.Button();
             this.lblPoeni = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.Error = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.Error)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -47,6 +50,7 @@
             this.tbIme.Name = "tbIme";
             this.tbIme.Size = new System.Drawing.Size(279, 20);
             this.tbIme.TabIndex = 1;
+            this.tbIme.Validating += new System.ComponentModel.CancelEventHandler(this.tbIme_Validating);
             // 
             // label2
             // 
@@ -94,11 +98,15 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "поени.";
             // 
+            // Error
+            // 
+            this.Error.ContainerControl = this;
+            // 
             // ScoreboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 107);
+            this.ClientSize = new System.Drawing.Size(321, 107);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblPoeni);
             this.Controls.Add(this.btnZachuvaj);
@@ -108,6 +116,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ScoreboardForm";
             this.Text = "ScoreboardForm";
+            ((System.ComponentModel.ISupportInitialize)(this.Error)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +131,6 @@
         private System.Windows.Forms.Button btnZachuvaj;
         private System.Windows.Forms.Label lblPoeni;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ErrorProvider Error;
     }
 }

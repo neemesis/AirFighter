@@ -385,7 +385,7 @@ namespace AirFighter {
         }
 
         /// <summary>
-        /// Funkcija koja gi zabrzuva neprijatelite.
+        /// Funkcija koja gi zabrzuva neprijatelite, odnosno pravi da se dvizhat pobrzo.
         /// </summary>
         public void SpeedUpEnemies() {
             Counter = ++Counter % 5;
