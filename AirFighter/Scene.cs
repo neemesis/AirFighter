@@ -24,6 +24,7 @@ namespace AirFighter {
         private SoundPlayer BombSound;
         private SoundPlayer GunSound;
         private SoundPlayer DeadEnemySound;
+        private SoundPlayer MenuHover;
         private Image Background1, Background2;
         private bool FirstBackground, SecondBackground;
         private int BackgroundPosition1, BackgroundPosition2;
@@ -51,6 +52,7 @@ namespace AirFighter {
             BombSound = new SoundPlayer("bomb_sound.wav");
             GunSound = new SoundPlayer("shot_gun_2.wav");
             DeadEnemySound = new SoundPlayer("BangShort.wav");
+            MenuHover = new SoundPlayer("mouseclick.wav");
             Background1 = Background2 = Resources.sky;
             BackgroundTimer = new Timer();
             BackgroundTimer.Interval = 10;
@@ -228,15 +230,23 @@ namespace AirFighter {
             if (IsPlaying) {
                 MovePlayer(3, e);
             } else {
+                int PreviouslySelected = 0, CurrentlySelected = 0;
+                if (Fields[1])
+                    PreviouslySelected = 1;
+                if (Fields[2])
+                    PreviouslySelected = 2;
+
                 if (e.Y >= 20 && e.Y <= 190) {
                     Fields[0] = true;
                     Fields[1] = false;
                     Fields[2] = false;
                 } else if (e.Y >= 200 && e.Y <= 370) {
+                    CurrentlySelected = 1;
                     Fields[0] = false;
                     Fields[1] = true;
                     Fields[2] = false;
                 } else if (e.Y >= 380 && e.Y <= 550) {
+                    CurrentlySelected = 2;
                     Fields[0] = false;
                     Fields[1] = false;
                     Fields[2] = true;
@@ -245,6 +255,9 @@ namespace AirFighter {
                     Fields[1] = false;
                     Fields[2] = false;
                 }
+
+                if (PreviouslySelected != CurrentlySelected)
+                    MenuHover.Play();
             }
         }
 
