@@ -29,7 +29,7 @@ namespace AirFighter {
         private bool FirstBackground, SecondBackground;
         private int BackgroundPosition1, BackgroundPosition2;
         private static readonly int BackgroundEnd = 600;
-        private static readonly int BackgroundHeight = -3307;
+        private static readonly int BackgroundHeight = -3312;
         private List<ScoreboardEntry> Scoreboard;
         private int DeadCounter;
         private int HowManyEnemies;
@@ -164,9 +164,9 @@ namespace AirFighter {
             if (IsPlaying) {
                 if (!Player.IsDead) {
                     if (FirstBackground)
-                        g.DrawImage(Background1, -26, BackgroundPosition1, 426, 3312);
+                        g.DrawImage(Background1, 0, BackgroundPosition1, 426, 3312);
                     if (SecondBackground)
-                        g.DrawImage(Background2, -26, BackgroundPosition2, 426, 3312);
+                        g.DrawImage(Background2, 0, BackgroundPosition2, 426, 3312);
                 }
 
                 Brush brush = new SolidBrush(Color.Black);
